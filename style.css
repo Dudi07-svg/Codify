@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codify — Kayıt Ol</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="auth-page">
+    <div class="auth-box">
+        <div class="logo-wrap">
+            <img src="images/logo.png" alt="Codify">
+        </div>
+        <h1 data-i18n="register">Kayıt Ol</h1>
+        <p class="subtitle">Yeni hesabını oluştur ve kodlama yolculuğuna başla! 🚀</p>
+
+        <div class="input-group">
+            <label data-i18n="user_label">Kullanıcı Adı</label>
+            <input type="text" id="username" placeholder="Kullanıcı adın">
+        </div>
+        <div class="input-group">
+            <label data-i18n="email_label">E-posta</label>
+            <input type="email" id="email" placeholder="E-posta adresin">
+        </div>
+        <div class="input-group">
+            <label data-i18n="pass_label">Şifre</label>
+            <input type="password" id="password" placeholder="Şifren" onkeydown="if(event.key==='Enter') register()">
+        </div>
+
+        <button class="btn btn-gold" onclick="register()" data-i18n="register">Kayıt Ol</button>
+        <p class="auth-msg" id="authMsg"></p>
+
+        <p class="auth-footer">
+            <span data-i18n="have_account">Zaten hesabın var mı?</span>
+            <a href="login.html" data-i18n="login"> Giriş Yap</a>
+        </p>
+        <p class="auth-footer" style="margin-top:10px">
+            <a href="index.html" style="color:var(--muted)">← Ana Sayfaya Dön</a>
+        </p>
+    </div>
+</div>
+
+<div class="lang-switcher">
+    <button class="lang-btn active" data-lang="tr" onclick="setLang('tr')">TR</button>
+    <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" data-lang="ar" onclick="setLang('ar')">AR</button>
+</div>
+
+<script src="i18n.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

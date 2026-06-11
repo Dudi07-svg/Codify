@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codify — Giriş Yap</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="auth-page">
+    <div class="auth-box">
+        <div class="logo-wrap">
+            <img src="images/logo.png" alt="Codify">
+        </div>
+        <h1 data-i18n="login_title">Giriş Yap</h1>
+        <p class="subtitle" data-i18n="login_sub">Hesabına giriş yap ve öğrenmeye devam et.</p>
+
+        <div class="input-group">
+            <label data-i18n="email_label">E-posta</label>
+            <input type="email" id="email" data-i18n-ph="email_label" placeholder="E-posta">
+        </div>
+        <div class="input-group">
+            <label data-i18n="pass_label">Şifre</label>
+            <input type="password" id="password" data-i18n-ph="pass_label" placeholder="Şifre" onkeydown="if(event.key==='Enter') login()">
+        </div>
+
+        <button class="btn btn-gold" onclick="login()" data-i18n="login">Giriş Yap</button>
+        <p class="auth-msg" id="authMsg"></p>
+
+        <p class="auth-footer">
+            <span data-i18n="no_account">Hesabın yok mu?</span>
+            <a href="register.html" data-i18n="register"> Kayıt Ol</a>
+        </p>
+        <p class="auth-footer" style="margin-top:10px">
+            <a href="index.html" style="color:var(--muted)">← Ana Sayfaya Dön</a>
+        </p>
+    </div>
+</div>
+
+<div class="lang-switcher">
+    <button class="lang-btn active" data-lang="tr" onclick="setLang('tr')">TR</button>
+    <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" data-lang="ar" onclick="setLang('ar')">AR</button>
+</div>
+
+<script src="i18n.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

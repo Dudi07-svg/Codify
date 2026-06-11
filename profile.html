@@ -1,0 +1,800 @@
+const LESSONS = {
+  python: getPythonLessons(),
+  Python: getPythonLessons(),
+  html: getHtmlLessons(),
+  HTML: getHtmlLessons(),
+  javascript: getJsLessons(),
+  JavaScript: getJsLessons(),
+  c: getCLessons(),
+  C: getCLessons(),
+  java: getJavaLessons(),
+  Java: getJavaLessons()
+};
+
+function getPythonLessons() {
+  return [
+    {
+      id: 1, icon: "🐍", title: "Python'a Giriş",
+      content: `Python, 1991 yılında Guido van Rossum tarafından geliştirilen, okunması kolay ve yüksek seviyeli bir programlama dilidir. Yapay zeka, veri bilimi, web geliştirme ve otomasyon alanlarında çok popülerdir.
+
+TEMEL ÖZELLİKLER:
+• Süslü parantezler yerine girintileme (indentation) kullanır.
+• Değişken türlerini belirtmek zorunlu değildir (Dinamik tipli).`,
+      code_example: `ad = "Codify"
+yas = 3
+print("Platform Adı:", ad)
+print(f"Yaş: {yas} | Tip: {type(yas)}")`
+    },
+    {
+      id: 2, icon: "➕", title: "Operatörler",
+      content: `Python'da matematiksel ve mantıksal işlemleri yapmak için operatörler kullanılır.
+
+ARİTMETİK OPERATÖRLER:
++ Toplama, - Çıkarma, * Çarpma, / Bölme
+// Tam Bölme (Küsüratı atar), % Mod (Kalanı verir), ** Üs Alma
+
+KARŞILAŞTIRMA OPERATÖRLERİ:
+== Eşittir, != Eşit Değildir, > Büyüktür, < Küçüktür`,
+      code_example: `sayi1 = 17
+sayi2 = 5
+
+print("Toplam:", sayi1 + sayi2)
+print("Kalan (Mod):", sayi1 % sayi2)
+print("Tam Bölme:", sayi1 // sayi2)
+print("Üs Alma (5^2):", sayi2 ** 2)`
+    },
+    {
+      id: 3, icon: "🔀", title: "Koşullu İfadeler",
+      content: `Programın belirli şartlara göre farklı kod bloklarını çalıştırmasını sağlamak için if, elif ve else yapıları kullanılır.
+
+KURAL: Koşuldan sonra mutlaka iki nokta (:) konur ve alt satırdaki kodlar girintili (tab tuşuyla) yazılır.`,
+      code_example: `not_degeri = 78
+
+if not_degeri >= 85:
+    print("Harika! Başarı Belgesi Alabilirsiniz.")
+elif not_degeri >= 50:
+    print("Tebrikler, Dersi Geçtiniz.")
+else:
+    print("Maalesef Kaldınız, Daha Çok Çalışmalısınız.")`
+    },
+    {
+      id: 4, icon: "🔁", title: "Döngüler",
+      content: `Belirli bir kod bloğunu tekrar tekrar çalıştırmak için döngüler kullanılır.
+
+FOR DÖNGÜSÜ: Genellikle belirli bir aralıkta veya bir listenin elemanları üzerinde dönmek için kullanılır.
+WHILE DÖNGÜSÜ: Belirlenen bir koşul doğru (True) olduğu sürece çalışmaya devam eder.`,
+      code_example: `print("--- For Döngüsü (1-5 arası) ---")
+for i in range(1, 6):
+    print("Sayı:", i)
+
+print("\\n--- While Döngüsü ---")
+sayac = 3
+while sayac > 0:
+    print("Geri sayım:", sayac)
+    sayac -= 1`
+    },
+    {
+      id: 5, icon: "📋", title: "Listeler (Lists)",
+      content: `Birden fazla veriyi tek bir değişken içinde sırayla saklamak için listeler kullanılır. Köşeli parantez [] ile tanımlanır.
+
+Sık Kullanılan Metodlar:
+• append(x): Listenin sonuna eleman ekler.
+• remove(x): Belirtilen elemanı listeden siler.
+• sort(): Listeyi küçükten büyüğe sıralar.`,
+      code_example: `programlama_dilleri = ["Python", "HTML", "C"]
+programlama_dilleri.append("Java")
+
+print("İlk Dil:", programlama_dilleri[0])
+print("Listenin Tamamı:", programlama_dilleri)
+print("Toplam Eleman Sayısı:", len(programlama_dilleri))`
+    },
+    {
+      id: 6, icon: "⚙️", title: "Fonksiyonlar",
+      content: `Belli bir işi yapan ve ihtiyaç duyulduğunda tekrar tekrar çağrılabilen kod bloklarıdır. 'def' anahtar kelimesi ile tanımlanır. 
+
+Dışarıya bir sonuç göndermek için 'return' ifadesi kullanılır.`,
+      code_example: `def selamla(isim):
+    return f"Merhaba {isim}, Codify platformuna hoş geldin!"
+
+def topla(a, b):
+    return a + b
+
+mesaj = selamla(isim="Ahmet")
+print(mesaj)
+print("Hesaplama Sonucu:", topla(12, 8))`
+    },
+    {
+      id: 7, icon: "📝", title: "String İşlemleri",
+      content: `Metinsel (String) ifadeleri düzenlemek, parçalamak veya değiştirmek için hazır fonksiyonlar mevcuttur.
+
+Yöntemler:
+• upper(): Tüm harfleri büyütür.
+• lower(): Tüm harfleri küçültür.
+• split(): Metni belirtilen karaktere göre böler ve liste yapar.`,
+      code_example: `metin = "  Python Programlama Dili  "
+
+print("Büyük Harf:", metin.upper())
+print("Temizlenmiş Hali:", metin.strip()) # Baş ve sondaki boşlukları siler
+print("Kelime Listesi:", metin.split())`
+    },
+    {
+      id: 8, icon: "📖", title: "Sözlükler (Dictionaries)",
+      content: `Anahtar-Değer (Key-Value) mantığıyla çalışan veri yapılarıdır. Süslü parantez {} kullanılarak tanımlanır. Gerçek hayattaki sözlükler gibidir, bir kelimeyi arayıp karşılığını bulursunuz.`,
+      code_example: `ogrenci = {
+    "ad": "Ebru",
+    "numara": 412,
+    "bolum": "Yazılım Mühendisliği"
+}
+
+print("Öğrenci Adı:", ogrenci["ad"])
+ogrenci["numara"] = 500 # Değer güncelleme
+print("Güncel Bilgi:", ogrenci)`
+    },
+    {
+      id: 9, icon: "🧩", title: "Lambda & List Comprehension",
+      content: `Python'da kod yazmayı kısaltan ve tek satırda işlem yapmayı sağlayan ileri düzey özelliklerdir.
+
+• Lambda: İsmi olmayan, tek satırlık pratik fonksiyonlardır.
+• List Comprehension: Tek satırda döngü çalıştırarak hızlıca liste üretmeyi sağlar.`,
+      code_example: `# Lambda örneği
+karesi = lambda x: x * x
+print("5'in karesi:", karesi(5))
+
+# List Comprehension örneği (0-4 arası sayıların iki katı)
+katlar = [i * 2 for i in range(5)]
+print("Çift Sayılar Listesi:", katlar)`
+    },
+    {
+      id: 10, icon: "🛡️", title: "Hata Yönetimi (Try-Except)",
+      content: `Program çalışırken meydana gelebilecek olası çökmeleri (örneğin sıfıra bölünme hatası veya yanlış veri girişi) önlemek için try-except blokları kullanılır. Programın hata verse bile durmamasını sağlar.`,
+      code_example: `try:
+    sayi = int(input("Bir sayı girin: ")) # Kullanıcı harf girerse hata oluşur
+    sonuc = 10 / sayi
+    print("Sonuç:", sonuc)
+except ZeroDivisionError:
+    print("Hata: Bir sayı sıfıra bölünemez!")
+except ValueError:
+    print("Hata: Lütfen geçerli bir sayı girin!")`
+    }
+  ];
+}
+
+function getHtmlLessons() {
+  return [
+    {
+      id: 1, icon: "🌐", title: "HTML'e Giriş & Temel Yapı",
+      content: `HTML (HyperText Markup Language), web sayfalarının iskeletini ve içeriğini oluşturmak için kullanılan bir işaretleme dilidir. Bir programlama dili değildir. 
+
+HTML dosyaları tarayıcılar (Chrome, Edge vb.) tarafından okunarak görsel bir web sayfasına dönüştürülür.`,
+      code_example: `<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>İlk Web Sayfam</title>
+</head>
+<body>
+    <p>Merhaba Dünya! Bu benim ilk web sayfam.</p>
+</body>
+</html>`
+    },
+    {
+      id: 2, icon: "📰", title: "Başlıklar & Paragraflar",
+      content: `HTML'de başlıklar oluşturmak için <h1> etiketinden <h6> etiketine kadar olan yapılar kullanılır. <h1> en büyük başlığı, <h6> ise en küçük başlığı temsil eder.
+
+Paragraflar oluşturmak için ise <p> (paragraph) etiketi kullanılır.`,
+      code_example: `<h1>Ana Başlık (H1)</h1>
+<h2>Alt Başlık (H2)</h2>
+<h3>Daha Küçük Başlık (H3)</h3>
+<p>Bu bir paragraf içeriğidir. Web sayfasındaki metinler genellikle bu etiketin içine yazılır.</p>`
+    },
+    {
+      id: 3, icon: "🔗", title: "Linkler & Görseller",
+      content: `Web sayfaları arasında bağlantı kurmak veya başka bir siteye yönlendirme yapmak için <a> (anchor) etiketi ve 'href' özelliği kullanılır.
+
+Sayfaya resim veya görsel eklemek için ise <img> (image) etiketi ve resmin yolunu belirten 'src' özelliği kullanılır.`,
+      code_example: `<-- Link Ekleme -->
+<a href="https://google.com" target="_blank">Google'a Git</a>
+
+<-- Resim Ekleme -->
+<img src="https://via.placeholder.com/150" alt="Örnek Resim Açıklaması">`
+    },
+    {
+      id: 4, icon: "📋", title: "Listeler & Tablolar",
+      content: `HTML'de iki temel liste türü vardır:
+• <ul>: Sırasız liste (Maddeli / Noktalı)
+• <ol>: Sıralı liste (1, 2, 3 şeklinde numaralı)
+Her iki listede de her bir madde <li> etiketiyle yazılır.
+
+Tablolar ise <table>, satırlar <tr> ve hücreler <td> etiketleriyle oluşturulur.`,
+      code_example: `<h3>Alışveriş Listesi</h3>
+<ul>
+    <li>Süt</li>
+    <li>Ekmek</li>
+    <li>Yumurta</li>
+</ul>
+
+<h3>Sıralama</h3>
+<ol>
+    <li>Birinci Adım</li>
+    <li>İkinci Adım</li>
+</ol>`
+    },
+    {
+      id: 5, icon: "📝", title: "Formlar & Girdiler (Inputs)",
+      content: `Kullanıcılardan bilgi (metin, şifre, e-posta, seçim) toplamak için <form> yapısı ve <input> etiketleri kullanılır. Butonlar için ise <button> etiketi tercih edilir.`,
+      code_example: `<form>
+    <label>Kullanıcı Adı:</label><br>
+    <input type="text" placeholder="Kullanıcı adınızı yazın"><br><br>
+    
+    <label>Şifre:</label><br>
+    <input type="password" placeholder="Şifreniz"><br><br>
+    
+    <button type="submit">Giriş Yap</button>
+</form>`
+    },
+    {
+      id: 6, icon: "🧩", title: "Semantik HTML",
+      content: `Arama motorlarının (Google gibi) ve tarayıcıların web sayfasını daha iyi anlaması için geliştirilmiş, yapısal anlam taşıyan etiketlerdir. 
+
+Eski tip her yere <div> yazmak yerine, sayfanın bölümlerini kendi ismiyle tanımlarız. Üst kısım için <header>, menü için <nav>, ana içerik için <main>, alt bilgi için <footer> kullanılır.`,
+      code_example: `<header>
+    <h1>Site Logosu ve Başlığı</h1>
+</header>
+<nav>
+    <a href="#anasayfa">Ana Sayfa</a> | <a href="#iletisim">İletişim</a>
+</nav>
+<main>
+    <article>
+        <h2>Makale Başlığı</h2>
+        <p>İçerik buraya yazılır.</p>
+    </article>
+</main>
+<footer>
+    <p>© 2026 Tüm Hakları Saklıdır.</p>
+</footer>`
+    },
+    {
+      id: 7, icon: "🎨", title: "CSS ile Stil Verme",
+      content: `HTML sayfasındaki elemanları renklendirmek, boyutlandırmak ve şekillendirmek için CSS (Cascading Style Sheets) kullanılır. HTML elemanlarına 'style' özelliği verilerek doğrudan stil eklenebilir (Inline CSS).`,
+      code_example: `<h1 style="color: blue; text-align: center;">Mavi Renkli Başlık</h1>
+<p style="background-color: yellow; font-size: 18px; padding: 10px;">
+    Arka planı sarı, yazı boyutu büyük bir paragraf.
+</p>`
+    },
+    {
+      id: 8, icon: "📐", title: "CSS Flexbox Düzeni",
+      content: `Sayfa içindeki kutuları (elemanları) yan yana veya alt alta kolayca dizmek, aralarına eşit boşluklar bırakmak ve hizalamak için modern CSS Flexbox yapısı kullanılır. Ana kapsayıcıya 'display: flex;' verilir.`,
+      code_example: `<div style="display: flex; justify-content: space-around; background: #eee; padding: 10px;">
+    <div style="background: red; padding: 20px; color: white;">Kutu 1</div>
+    <div style="background: green; padding: 20px; color: white;">Kutu 2</div>
+    <div style="background: blue; padding: 20px; color: white;">Kutu 3</div>
+</div>`
+    },
+    {
+      id: 9, icon: "📱", title: "Responsive Tasarım & Media Query",
+      content: `Web sitelerinin bilgisayar, tablet ve akıllı telefon ekranlarında düzgün ve bozulmadan görünmesini sağlamaya Responsive (Duyarlı) tasarım denir. CSS'teki '@media' kuralları ile ekran genişliğine göre farklı stiller uygulanır.`,
+      code_example: `<style>
+    .kutu { background-color: lightblue; padding: 20px; }
+    
+    /* Ekran genişliği 768px veya daha küçükse (Mobil) arka plan rengini değiştir */
+    @media (max-width: 768px) {
+        .kutu { background-color: lightcoral; }
+    }
+</style>
+<div class="kutu">Bilgisayarda Mavi, Mobilde Kırmızı Görünürüm!</div>`
+    },
+    {
+      id: 10, icon: "♿", title: "Erişilebilirlik & SEO",
+      content: `Web sitenizin hem arama motorlarında üst sıralara çıkması (SEO) hem de görme engelli bireylerin ekran okuyucularıyla siteyi rahatça gezebilmesi için dikkat edilmesi gereken kurallardır. 
+
+Doğru etiket seçimi ve resimlere açıklama (alt) eklemek kritiktir.`,
+      code_example: `<img src="logo.png" alt="Codify Eğitim Platformu Logosu">
+
+<button aria-label="Menüyü Kapat ve Sayfaya Dön">X</button>`
+    }
+  ];
+}
+
+function getJsLessons() {
+  return [
+    {
+      id: 1, icon: "⚡", title: "JavaScript'e Giriş",
+      content: `JavaScript (JS), web sayfalarını dinamik, hareketli ve interaktif hale getirmek için kullanılan güçlü bir programlama dilidir. HTML ve CSS ile yapılan durağan sayfaları canlandırır.
+
+Modern standartlarda değişken tanımlamak için 'let' (değiştirilebilir) ve 'const' (sabit, değiştirilemez) anahtar kelimeleri kullanılır.`,
+      code_example: `let kullanici_adi = "Can";
+const PI_SAYISI = 3.14;
+
+kullanici_adi = "Canan"; // Değiştirilebilir
+// PI_SAYISI = 3.20; // HATA VERİR! Değiştirilemez.
+
+console.log("Kullanıcı:", kullanici_adi);
+console.log("Pi Sabiti:", PI_SAYISI);`
+    },
+    {
+      id: 2, icon: "⚙️", title: "Modern Fonksiyonlar",
+      content: `JavaScript'te fonksiyonlar klasik yöntemle veya modern ES6 standartı olan Ok Fonksiyonları (Arrow Functions) ile tanımlanabilir. Ok fonksiyonları daha kısa ve pratik bir yazım sunar.`,
+      code_example: `// Klasik Yöntem
+function kareAl(sayi) {
+    return sayi * sayi;
+}
+
+// Modern Ok Fonksiyonu (Arrow Function)
+const topla = (a, b) => a + b;
+
+console.log("Karesi:", kareAl(4));
+console.log("Toplam Sonucu:", topla(7, 8));`
+    },
+    {
+      id: 3, icon: "📋", title: "Gelişmiş Dizi Metodları",
+      content: `JavaScript dizileri üzerinde döngü kurmak ve verileri işlemek için modern harika metodlar vardır:
+• map(): Dizideki her elemanı değiştirerek yeni bir dizi üretir.
+• filter(): Belirli bir kurala uyan elemanları seçip yeni dizi yapar.`,
+      code_example: `const rakamlar = [1, 2, 3, 4, 5];
+
+// Tüm sayıların 2 katını alma (map)
+const iki_katlar = rakamlar.map(x => x * 2);
+console.log("İki Katı:", iki_katlar);
+
+// Sadece çift sayıları seçme (filter)
+const ciftler = rakamlar.filter(num => num % 2 === 0);
+console.log("Çift Sayılar:", ciftler);`
+    },
+    {
+      id: 4, icon: "📦", title: "Nesneler & Sınıflar (OOP)",
+      content: `JavaScript, Nesne Yönelimli Programlamayı (OOP) destekler. Nesneler (Objects) süslü parantez içinde özellik barındırır. Sınıflar (Classes) ise bu nesneleri üretmek için şablon görevi görür.`,
+      code_example: `// Nesne (Object) Tanımı
+const araba = {
+    marka: "Tesla",
+    model: "Model 3",
+    calis: function() { return "Araba çalıştı..."; }
+};
+console.log(araba.marka, "-", araba.calis());
+
+// Sınıf (Class) Tanımı
+class Oyuncu {
+    constructor(isim) { this.isim = isim; }
+    selamla() { return \`Merhaba \${this.isim}\`; }
+}
+const user = new Oyuncu("Mert");
+console.log(user.selamla());`
+    },
+    {
+      id: 5, icon: "🌐", title: "DOM Manipülasyonu",
+      content: `DOM (Document Object Model), HTML sayfasındaki elementlerin JS ile kontrol edilmesini sağlayan yapıdır. JS kullanarak bir HTML elemanının yazısını, rengini veya stilini dinamik olarak değiştirebiliriz.`,
+      code_example: `// HTML'deki bir elemanı ID veya Sınıfına göre seçme
+// <div id="baslik">Eski Yazı</div> olduğunu varsayalım
+
+const ana_baslik = document.querySelector("#baslik");
+
+// Yazıyı ve rengini değiştirme
+if(ana_baslik) {
+    ana_baslik.textContent = "JavaScript ile Güncellenmiş Başlık!";
+    ana_baslik.style.color = "darkgreen";
+}`
+    },
+    {
+      id: 6, icon: "⏳", title: "Asenkron Programlama & Fetch API",
+      content: `Web sitelerinin donmasını önlemek ve arka planda bir sunucudan veya API'den veri çekmek için asenkron (async/await) yapılar ve 'fetch' fonksiyonu kullanılır. Sayfa yenilenmeden veri güncellenmesini sağlar.`,
+      code_example: `async function havaDurumuGetir() {
+    try {
+        // Örnek bir API'den veri çekme isteği gönderiyoruz
+        const response = await fetch("https://jsonplaceholder.typicode.com/users/1");
+        const veri = await response.json();
+        console.log("Gelen Kullanıcı Adı:", veri.name);
+    } catch (hata) {
+        console.error("Veri çekilirken hata oluştu:", hata);
+    }
+}`
+    },
+    {
+      id: 7, icon: "🗃️", title: "Tarayıcı Hafızası (LocalStorage)",
+      content: `Kullanıcının verilerini (örneğin seçtiği karanlık modu, skorunu veya giriş bilgilerini) tarayıcı kapatılsa bile kaybetmemek için LocalStorage hafızası kullanılır. Veriler anahtar-değer olarak saklanır.`,
+      code_example: `// Hafızaya veri kaydetme
+localStorage.setItem("kullanici_skor", "85");
+localStorage.setItem("tema_modu", "dark");
+
+// Hafızadan veri okuma
+const skor = localStorage.getItem("kullanici_skor");
+console.log("Kaydedilen Skorunuz:", skor);`
+    },
+    {
+      id: 8, icon: "🔄", title: "Modern ES6+ Özellikleri",
+      content: `JavaScript'i daha kısa yazmayı sağlayan modern operatörlerdir:
+• Spread Operatörü (...): Bir dizinin veya nesnenin içindekileri başka bir yere dağıtarak kopyalar.
+• Destructuring: Dizi veya nesne içindeki verileri tek hamlede değişkenlere çıkartır.`,
+      code_example: `const eski_dizi = [1, 2];
+const yeni_dizi = [...eski_dizi, 3, 4]; // [1, 2, 3, 4]
+
+const kisi = { ad: "Selin", yas: 24 };
+const { ad, yas } = kisi; // Destructuring
+
+console.log("Yeni Dizi:", yeni_dizi);
+console.log("Kişi Bilgisi:", ad, yas);`
+    },
+    {
+      id: 9, icon: "🧪", title: "İleri Seviye Hata Yönetimi",
+      content: `Uygulamanın beklenmedik durumlarda çökmesini engellemek amacıyla kritik kodlar 'try-catch' bloğuna alınır. Hata olursa catch kısmı devreye girer. Gerekirse 'throw' ile manuel hata fırlatılabilir.`,
+      code_example: `function yasKontrol(yas) {
+    if (yas < 18) {
+        throw new Error("18 yaşından küçükler kayıt olamaz!");
+    }
+    return "Kayıt başarılı.";
+}
+
+try {
+    let sonuc = yasKontrol(15);
+    console.log(sonuc);
+} catch (error) {
+    console.log("Yakalanan Hata Mesajı:", error.message);
+}`
+    },
+    {
+      id: 10, icon: "🚀", title: "Modüller & Event Loop",
+      content: `JavaScript kodlarını parçalara bölüp farklı dosyalarda yönetmek için 'export' ve 'import' modül sistemi kullanılır. 
+
+Event Loop ise JS'in tek iş parçacıklı (single-threaded) yapısına rağmen asenkron görevleri nasıl sırayla ve hızlıca yönettiğini açıklayan motor mekanizmasıdır.`,
+      code_example: `// Matematik.js dosyasında olduğunu varsayalım:
+// export const carp = (a, b) => a * b;
+
+// Ana dosyamızda kullanımı:
+// import { carp } from './Matematik.js';
+
+console.log("Event Loop Örneği - Başlangıç");
+setTimeout(() => {
+    console.log("Zamanlayıcı: 2 saniye sonra ben çalıştım!");
+}, 2000);
+console.log("Event Loop Örneği - Bitiş (Zamanlayıcıyı beklemeden çalışır)");`
+    }
+  ];
+}
+
+function getCLessons() {
+  return [
+    {
+      id: 1, icon: "⚙️", title: "C Diline Giriş & Temel Yapı",
+      content: `C, 1972 yılında Dennis Ritchie tarafından geliştirilmiş, derlenen, donanıma yakın ve yüksek performanslı bir sistem programlama dilidir. İşletim sistemleri, oyun motorları ve gömülü sistemler C ile yazılır.
+
+C dilinde her komuttan sonra noktalı virgül (;) kullanımı zorunludur.`,
+      code_example: `#include <stdio.h>
+
+int main() {
+    // printf ekrana çıktı vermek için kullanılır
+    printf("Merhaba C Dünyası!\\n");
+    return 0;
+}`
+    },
+    {
+      id: 2, icon: "📥", title: "Giriş ve Çıkış İşlemleri",
+      content: `Ekrana yazı yazdırmak için 'printf()', kullanıcıdan klavye yoluyla veri almak için ise 'scanf()' fonksiyonu kullanılır. 
+
+'scanf' ile değer alırken değişkenin başına adres operatörü olan ampersand (&) işareti konulmalıdır.`,
+      code_example: `#include <stdio.h>
+
+int main() {
+    int girilen_yas;
+    printf("Lütfen yaşınızı giriniz: ");
+    
+    // %d tamsayı (integer) format belirleyicisidir
+    scanf("%d", &girilen_yas);
+    
+    printf("Girdiğiniz yaş: %d\\n", girilen_yas);
+    return 0;
+}`
+    },
+    {
+      id: 3, icon: "🔀", title: "Koşullar & Switch-Case",
+      content: `C dilinde şartlı durumları yönetmek için 'if-else' blokları kullanılır. Birden fazla net seçenek ve menü tasarımları için ise 'switch-case' yapısı çok daha temiz bir görünüm sağlar. Her case'den sonra 'break' eklenmelidir.`,
+      code_example: `#include <stdio.h>
+
+int main() {
+    int secim = 2;
+    switch(secim) {
+        case 1: printf("1. Seçenek Seçildi\\n"); break;
+        case 2: printf("2. Seçenek Seçildi (Doğru)\\n"); break;
+        default: printf("Geçersiz Seçim\\n");
+    }
+    return 0;
+}`
+    },
+    {
+      id: 4, icon: "🔁", title: "Döngüler (Loops)",
+      content: `C dilinde kodları tekrarlatmak için üç temel döngü vardır:
+• for: Başlangıcı, bitişi ve artış miktarı belli durumlarda.
+• while: Koşul doğru olduğu sürece çalışır.
+• do-while: Koşul yanlış olsa bile kod bloğunu en az bir kez çalıştırır.`,
+      code_example: `#include <stdio.h>
+
+int main() {
+    printf("For Döngüsü: ");
+    for(int i = 1; i <= 3; i++) {
+        printf("%d ", i);
+    }
+    
+    printf("\\nWhile Döngüsü: ");
+    int k = 3;
+    while(k > 0) {
+        printf("%d ", k);
+        k--;
+    }
+    return 0;
+}`
+    },
+    {
+      id: 5, icon: "📋", title: "Diziler (Arrays)",
+      content: `Aynı türdeki (örneğin sadece tamsayılar veya karakterler) birden fazla veriyi yan yana hafızada saklayan yapılardır. C'de dizilerin boyutu tanımlanırken sabittir, sonradan genişletilemez. İndeksler 0'dan başlar.`,
+      code_example: `#include <stdio.h>
+
+int main() {
+    // 4 elemanlı tamsayı dizisi
+    int notlar[4] = {85, 90, 70, 100};
+    
+    printf("İlk Not: %d\\n", notlar[0]);
+    printf("Üçüncü Not: %d\\n", notlar[2]);
+    return 0;
+}`
+    },
+    {
+      id: 6, icon: "⚙️", title: "Fonksiyonlar",
+      content: `Büyük programları parçalara bölerek yönetilebilir hale getiren yapılardır. C dilinde yazılan fonksiyonların ana gövde olan 'main' fonksiyonundan önce tanımlanması veya prototipinin bildirilmesi gerekir.`,
+      code_example: `#include <stdio.h>
+
+// Fonksiyon Tanımı
+int carpma_yap(int x, int y) {
+    return x * y;
+}
+
+int main() {
+    int sonuc = carpma_yap(5, 6);
+    printf("Çarpım Sonucu: %d\\n", sonuc);
+    return 0;
+}`
+    },
+    {
+      id: 7, icon: "📍", title: "Pointerlar (İşaretçiler)",
+      content: `C dilinin en güçlü ve kritik konusudur. Pointer (İşaretçi), normal bir değer saklamak yerine, başka bir değişkenin bilgisayar belleğindeki (RAM) fiziksel adresini tutan özel bir değişkendir. Yıldız (*) işaretiyle tanımlanır.`,
+      code_example: `#include <stdio.h>
+
+int main() {
+    int sayi = 42;
+    int *ptr = &sayi; // ptr değişkeni sayi'nın bellekteki adresini tutar
+    
+    printf("Sayının Değeri: %d\\n", sayi);
+    printf("Pointer ile Değere Erişim: %d\\n", *ptr);
+    printf("Sayının Bellek Adresi: %p\\n", ptr);
+    return 0;
+}`
+    },
+    {
+      id: 8, icon: "📝", title: "Karakter Dizileri (Strings)",
+      content: `C dilinde doğrudan bir 'string' veri tipi yoktur. Metinler, karakterlerin yan yana gelmesiyle oluşan karakter dizileri (char arrays) olarak tanımlanır. Her metnin sonunda gizli bir '\\0' (null) bitiş karakteri bulunur.`,
+      code_example: `#include <stdio.h>
+#include <string.h> // String fonksiyonları için gerekli
+
+int main() {
+    char isim[] = "Codify";
+    printf("Karakter Dizisi: %s\\n", isim);
+    printf("Metin Uzunluğu: %lu\\n", strlen(isim));
+    return 0;
+}`
+    },
+    {
+      id: 9, icon: "📐", title: "Yapılar (Structures / Struct)",
+      content: `Farklı türdeki değişkenleri (örneğin bir öğrencinin adı, yaşı ve ortalamasını) tek bir çatı altında toplayarak yeni bir özel veri tipi oluşturmaya yarar. Nesne yönelimli programlamadaki sınıfların atasıdır.`,
+      code_example: `#include <stdio.h>
+
+struct Kitap {
+    char ad[30];
+    float fiyat;
+};
+
+int main() {
+    struct Kitap k1 = {"C Programlama", 145.50};
+    
+    printf("Kitap Adı: %s\\n", k1.ad);
+    printf("Fiyatı: %.2f TL\\n", k1.fiyat);
+    return 0;
+}`
+    },
+    {
+      id: 10, icon: "💾", title: "Dinamik Bellek Yönetimi",
+      content: `Program çalışırken RAM'den çalışma anında yer ayırmak ve işimiz bittiğinde bu yeri temizlemek için kullanılır. 
+• malloc(): Bellekten yer ayırır.
+• free(): Ayırılan yeri serbest bırakarak RAM'i rahatlatır (Çok önemlidir).`,
+      code_example: `#include <stdio.h>
+#include <stdlib.h> // malloc ve free için gerekli
+
+int main() {
+    // Bellekte 1 adet tamsayılık yer ayırıyoruz
+    int *p = (int*) malloc(sizeof(int));
+    
+    if(p != NULL) {
+        *p = 75;
+        printf("Dinamik Bellekteki Değer: %d\\n", *p);
+        free(p); // Belleği temizleme, RAM sızıntısını önler
+    }
+    return 0;
+}`
+    }
+  ];
+}
+
+function getJavaLessons() {
+  return [
+    {
+      id: 1, icon: "☕", title: "Java'ya Giriş & Temel Yapı",
+      content: `Java, 1995 yılında James Gosling tarafından geliştirilen, tamamen Nesne Yönelimli (OOP) ve platformdan bağımsız bir dildir. "Bir kere yaz, her yerde çalıştır" (Write Once, Run Anywhere) felsefesiyle JVM (Java Sanal Makinesi) üzerinde çalışır.
+
+KURAL: Java'da her kod satırı bir sınıfın (class) içerisinde yer almalıdır.`,
+      code_example: `public class Main {
+    public static void main(String[] args) {
+        // System.out.println ekrana yazdırma komutudur
+        System.out.println("Merhaba Java Dünyası!");
+    }
+}`
+    },
+    {
+      id: 2, icon: "📥", title: "Scanner Sınıfı ile Girdiler",
+      content: `Kullanıcıdan konsol üzerinden veri/girdi almak için Java'da 'java.util.Scanner' kütüphane sınıfı kullanılır. İlk olarak Scanner sınıfından bir nesne üretilir, ardından uygun metodlar (nextInt, nextLine) ile veri okunur.`,
+      code_example: `import java.util.Scanner;
+
+public class Girdi {
+    public static void main(String[] args) {
+        Scanner tarayici = new Scanner(System.in);
+        System.out.print("Bir sayı giriniz: ");
+        
+        int sayi = tarayici.nextInt();
+        System.out.println("Girdiğiniz sayının iki katı: " + (sayi * 2));
+        tarayici.close(); // Kapatılması iyi bir uygulamadır
+    }
+}`
+    },
+    {
+      id: 3, icon: "🔀", title: "Koşullar & Gelişmiş Döngüler",
+      content: `Java'da standart if-else ve döngülerin (for, while) yanı sıra, dizilerin veya koleksiyonların tüm elemanlarında kolayca dönmek için geliştirilmiş 'For-Each' (Gelişmiş For) döngüsü sıklıkla tercih edilir.`,
+      code_example: `public class Dongu {
+    public static void main(String[] args) {
+        int[] rakamlar = {10, 20, 30};
+        
+        // Gelişmiş For-Each Döngüsü
+        for(int x : rakamlar) {
+            System.out.println("Eleman: " + x);
+        }
+    }
+}`
+    },
+    {
+      id: 4, icon: "📦", title: "Sınıf ve Nesne Yapısı",
+      content: `Java tamamen nesne yönelimlidir. Sınıf (Class) bir nesnenin taslağı veya prototipidir. Nesne (Object) ise bu şablondan 'new' anahtar kelimesi kullanılarak türetilen gerçek örnektir.`,
+      code_example: `class Bilgisayar {
+    String marka = "Apple";
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Nesne üretimi
+        Bilgisayar pc = new Bilgisayar();
+        System.out.println("Bilgisayar Markası: " + pc.marka);
+    }
+}`
+    },
+    {
+      id: 5, icon: "🔒", title: "Kapsülleme (Encapsulation)",
+      content: `Sınıf içerisindeki değişkenleri koruma altına almak amacıyla onları 'private' (gizli) yapmak ve bu değişkenlere kontrollü erişim sağlamak için 'Getter' ve 'Setter' metodlarını kullanma prensibidir. Dışarıdan doğrudan müdahaleyi engeller.`,
+      code_example: `class Kullanici {
+    private String isim; // Gizli değişken
+    
+    // Değeri okumak için Getter
+    public String getIsim() { return this.isim; }
+    
+    // Değeri güvenle değiştirmek için Setter
+    public void setIsim(String yeniIsim) { this.isim = yeniIsim; }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Kullanici k = new Kullanici();
+        k.setIsim("Zeynep");
+        System.out.println("Kullanıcı: " + k.getIsim());
+    }
+}`
+    },
+    {
+      id: 6, icon: "🧬", title: "Kalıtım (Inheritance)",
+      content: `Bir sınıfın, ortak özelliklere sahip başka bir sınıftan değişkenleri ve metodları miras alarak kendi içine dahil etmesidir. Kod tekrarını önler. 'extends' anahtar kelimesi kullanılır.`,
+      code_example: `class Hayvan {
+    void yemekYe() { System.out.println("Bu hayvan yemek yiyor."); }
+}
+
+// Kedi sınıfı Hayvan sınıfından miras alıyor
+class Kedi extends Hayvan {
+    void miyavla() { System.out.println("Miyav!"); }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Kedi kedi = new Kedi();
+        kedi.yemekYe(); // Miras alınan metod
+        kedi.miyavla(); // Kendi metodu
+    }
+}`
+    },
+    {
+      id: 7, icon: "🎭", title: "Çok Biçimlilik (Polymorphism)",
+      content: `Miras alınan bir metodun, alt sınıflar tarafından kendine özgü bir şekilde yeniden yazılmasına (ezilmesine) Çok Biçimlilik denir. Metodun üzerine '@Override' notu eklenerek belirtilir.`,
+      code_example: `class Sifreleyici {
+    void sifrele() { System.out.println("Standart şifreleme yapıldı."); }
+}
+
+class GucluSifreleyici extends Sifreleyici {
+    @Override
+    void sifrele() { System.out.println("AES-256 ile çok güçlü şifreleme yapıldı!"); }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Sifreleyici s = new GucluSifreleyici();
+        s.sifrele(); // Alt sınıftaki ezilmiş metod çalışır
+    }
+}`
+    },
+    {
+      id: 8, icon: "🧱", title: "Soyutlama (Abstraction & Interface)",
+      content: `Alt sınıflara zorunlu bir şablon/görev listesi sunmak için 'interface' veya 'abstract' yapılar kullanılır. Interface'lerin içerisine sadece gövdesiz (içi boş) metod tanımları yazılır, alt sınıflar 'implements' ile bunu doldurur.`,
+      code_example: `interface Calisabilir {
+    void gorevYap(); // Gövdesiz zorunlu metod
+}
+
+class Muhendis implements Calisabilir {
+    public void gorevYap() {
+        System.out.println("Mühendis kod yazma görevini yapıyor.");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Muhendis m = new Muhendis();
+        m.gorevYap();
+    }
+}`
+    },
+    {
+      id: 9, icon: "🧪", title: "Hata Yönetimi (Try-Catch)",
+      content: `Uygulamanın çalışma esnasında beklenmedik şekilde patlamasını (çökmesini) engellemek için 'try-catch' yapısı kullanılır. Olası tüm hatalar 'Exception' sınıfı ile yakalanabilir ve kullanıcıya tatlı bir uyarı verilebilir.`,
+      code_example: `public class Hata {
+    public static void main(String[] args) {
+        try {
+            int[] sayilar = {1, 2};
+            System.out.println(sayilar[5]); // Olmayan indekse erişim hatası
+        } catch (Exception e) {
+            System.out.println("Bir hata yakalandı: " + e.getMessage());
+        } finally {
+            System.out.println("Finally bloğu her halükarda çalışır.");
+        }
+    }
+}`
+    },
+    {
+      id: 10, icon: "📚", title: "Java Koleksiyonları (ArrayList & HashMap)",
+      content: `Standart dizilerin boyutu değiştirilemediği için Java gelişmiş koleksiyon yapıları sunar:
+• ArrayList: Boyutu dinamik olarak kendi büyüyen ve küçülen esnek liste.
+• HashMap: Anahtar-Değer (Key-Value) ilişkisiyle veri saklayan çok hızlı yapı.`,
+      code_example: `import java.util.ArrayList;
+import java.util.HashMap;
+
+public class Koleksiyon {
+    public static void main(String[] args) {
+        // Dinamik Liste
+        ArrayList<String> sehirler = new ArrayList<>();
+        sehirler.add("İstanbul"); sehirler.add("Ankara");
+        System.out.println("Şehir: " + sehirler.get(0));
+
+        // Anahtar-Değer Eşlemesi (Sözlük)
+        HashMap<String, Integer> yaslar = new HashMap<>();
+        yaslar.put("Ali", 25);
+        System.out.println("Ali'nin Yaşı: " + yaslar.get("Ali"));
+    }
+}`
+    }
+  ];
+}

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codify — Oyunlaştırılmış Kodlama Eğitimi</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="brand">
+        <img src="images/logo.png" class="main-logo" alt="Codify">
+    </div>
+    <nav>
+        <a href="index.html" data-i18n="nav_home">Ana Sayfa</a>
+        <a href="dashboard.html" data-i18n="nav_levels">Levellar</a>
+        <a href="dashboard.html" data-i18n="nav_tasks">Görevler</a>
+        <a href="leaderboard.html" data-i18n="nav_community">Topluluk</a>
+        <a href="#about" data-i18n="nav_about">Hakkımızda</a>
+    </nav>
+    <div class="nav-buttons">
+        <a href="login.html" class="btn btn-outline" data-i18n="login">Giriş Yap</a>
+        <a href="register.html" class="btn btn-gold" data-i18n="register">Kayıt Ol</a>
+    </div>
+</nav>
+
+<section class="hero">
+    <div class="hero-badge" data-i18n="hero_badge"># Programlamayı Öğren</div>
+    <h1><span data-i18n="hero_h1_1">Oyun </span><span data-i18n="hero_h1_2">Gibi Öğren</span></h1>
+    <p data-i18n="hero_sub">Gerçek kod yazarak görevleri tamamla, seviyeleri geç, becerilerini geliştir.</p>
+    <p class="tagline" data-i18n="hero_tag">✨ Kodla. Oyna. Seviye Atla. ✨</p>
+    <div class="hero-buttons">
+        <a href="register.html" class="btn btn-gold" style="font-size:17px;padding:16px 36px" data-i18n="start">Hemen Başla</a>
+        <a href="login.html" class="btn btn-outline" style="font-size:17px;padding:16px 36px" data-i18n="signin">Giriş Yap</a>
+    </div>
+</section>
+
+<div class="stats-bar">
+    <div class="stat-item"><div class="num">46+</div><div class="label">Kodlama Görevi</div></div>
+    <div class="stat-item"><div class="num">5</div><div class="label">Programlama Dili</div></div>
+    <div class="stat-item"><div class="num">13</div><div class="label">Farklı Rozet</div></div>
+    <div class="stat-item"><div class="num">5</div><div class="label">Seviye</div></div>
+</div>
+
+<div class="features" style="padding-top:0">
+    <div class="feature-card">
+        <div class="feature-icon">⌨️</div>
+        <h3 data-i18n="f1_title">Gerçek Görevler</h3>
+        <p data-i18n="f1_desc">Gerçek dünyadan alınmış kodlama görevleriyle öğren.</p>
+    </div>
+    <div class="feature-card">
+        <div class="feature-icon">◎</div>
+        <h3 data-i18n="f2_title">Seviye Sistemi</h3>
+        <p data-i18n="f2_desc">XP kazan, seviyeleri geç, gelişimini takip et.</p>
+    </div>
+    <div class="feature-card">
+        <div class="feature-icon">🏆</div>
+        <h3 data-i18n="f3_title">Rozet & Başarılar</h3>
+        <p data-i18n="f3_desc">13 farklı rozet seni bekliyor.</p>
+    </div>
+    <div class="feature-card">
+        <div class="feature-icon">👥</div>
+        <h3 data-i18n="f4_title">Topluluk</h3>
+        <p data-i18n="f4_desc">Leaderboard'da yarış, en iyiler arasına gir.</p>
+    </div>
+</div>
+
+<div class="languages-section">
+    <div class="section-header">
+        <h2 data-i18n="lang_title">5 Programlama Dili</h2>
+        <p>Sana en uygun dili seç ve kodlamaya başla</p>
+    </div>
+    <div class="lang-grid">
+        <div class="lang-card" onclick="window.location.href='register.html'">
+            <div class="lang-icon">🐍</div>
+            <h3>Python</h3>
+            <p>13 görev · 3 level</p>
+        </div>
+        <div class="lang-card" onclick="window.location.href='register.html'">
+            <div class="lang-icon">🌐</div>
+            <h3>HTML</h3>
+            <p>9 görev · 3 level</p>
+        </div>
+        <div class="lang-card" onclick="window.location.href='register.html'">
+            <div class="lang-icon">⚡</div>
+            <h3>JavaScript</h3>
+            <p>9 görev · 2 level</p>
+        </div>
+        <div class="lang-card" onclick="window.location.href='register.html'">
+            <div class="lang-icon">💻</div>
+            <h3>C</h3>
+            <p>8 görev · 3 level</p>
+        </div>
+        <div class="lang-card" onclick="window.location.href='register.html'">
+            <div class="lang-icon">☕</div>
+            <h3>Java</h3>
+            <p>9 görev · 3 level</p>
+        </div>
+    </div>
+</div>
+
+<div class="levels-section" id="about">
+    <div class="section-header">
+        <h2 data-i18n="levels_title">Seviye Sistemi</h2>
+        <p>Kazandığın XP ile bölümleri tamamla ve zorlukları aşarak Final'e ulaş!</p>
+    </div>
+    <div class="levels-row">
+        <div class="level-pill"><div class="lnum">Level 1</div><div class="lxp">0 XP</div></div>
+        <div class="level-pill"><div class="lnum">Level 2</div><div class="lxp">100 XP</div></div>
+        <div class="level-pill"><div class="lnum">Level 3</div><div class="lxp">250 XP</div></div>
+        <div class="level-pill"><div class="lnum">Level 4</div><div class="lxp">500 XP</div></div>
+        <div class="level-pill"><div class="lnum">Level 5 👑</div><div class="lxp">800 XP</div></div>
+    </div>
+</div>
+
+<footer>
+    <div class="brand-name">Codify</div>
+    <p data-i18n="footer_tag">Kodla. Oyna. Seviye Atla.</p>
+    <p>© 2026 Istanbul Topkapı Üniversitesi</p>
+</footer>
+
+<div class="lang-switcher">
+    <button class="lang-btn active" data-lang="tr" onclick="setLang('tr')">TR</button>
+    <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" data-lang="ar" onclick="setLang('ar')">AR</button>
+</div>
+
+<script src="i18n.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

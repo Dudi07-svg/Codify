@@ -1,0 +1,201 @@
+from flask import Flask, request, jsonify
+from flask_cors import CORS
+import sqlite3
+from datetime import date
+
+app = Flask(__name__)
+CORS(app)
+DATABASE_NAME = "codify.db"
+
+
+def get_db():
+    conn = sqlite3.connect(DATABASE_NAME)
+    conn.row_factory = sqlite3.Row
+    return conn
+
+
+def calculate_level(xp):
+    if xp < 100: return 1
+    elif xp < 250: return 2
+    elif xp < 500: return 3
+    elif xp < 800: return 4
+    else: return 5
+
+
+def check_badges(conn, user_id, xp, level, completed_tasks):
+    badges = conn.execute("SELECT * FROM badges").fetchall()
+    newly_earned = []
+    for badge in badges:
+        ct, cv = badge["condition_type"], badge["condition_value"]
+        earned = (ct == "tasks" and completed_tasks >= cv) or \
+                 (ct == "xp" and xp >= cv) or \
+                 (ct == "level" and level >= cv)
+        if earned:
+            try:
+                conn.execute("INSERT OR IGNORE INTO user_badges (user_id, badge_id) VALUES (?,?)", (user_id, badge["id"]))
+                if conn.execute("SELECT changes()").fetchone()[0] > 0:
+                    newly_earned.append({"name": badge["name"], "icon": badge["icon"], "description": badge["description"]})
+            except: pass
+    return newly_earned
+
+
+@app.route("/")
+def home():
+    return "Codify backend çalışıyor ✅"
+
+
+@app.route("/register", methods=["POST"])
+def register():
+    data = request.get_json()
+    username = data.get("username", "").strip()
+    email = data.get("email", "").strip()
+    password = data.get("password", "").strip()
+    if not username or not email or not password:
+        return jsonify({"message": "Tüm alanlar zorunludur."}), 400
+    conn = get_db()
+    try:
+        conn.execute("INSERT INTO users (username, email, password) VALUES (?,?,?)", (username, email, password))
+        conn.commit()
+        user = conn.execute("SELECT * FROM users WHERE email=?", (email,)).fetchone()
+        return jsonify({"message": "Kayıt başarılı!", "user": dict(user)}), 201
+    except:
+        return jsonify({"message": "Bu email veya kullanıcı adı zaten kayıtlı."}), 400
+    finally:
+        conn.close()
+
+
+@app.route("/login", methods=["POST"])
+def login():
+    data = request.get_json()
+    email = data.get("email", "").strip()
+    password = data.get("password", "").strip()
+    conn = get_db()
+    user = conn.execute("SELECT * FROM users WHERE email=? AND password=?", (email, password)).fetchone()
+    conn.close()
+    if not user:
+        return jsonify({"message": "Hatalı email veya şifre."}), 401
+    return jsonify({"message": "Giriş başarılı!", "user": dict(user)})
+
+
+@app.route("/tasks", methods=["GET"])
+def get_tasks():
+    language = request.args.get("language")
+    level = request.args.get("level", 5)
+    conn = get_db()
+    query = "SELECT * FROM tasks WHERE 1=1"
+    params = []
+    if language:
+        query += " AND language=?"
+        params.append(language)
+    query += " AND level_required<=? ORDER BY level_required, id"
+    params.append(int(level))
+    tasks = conn.execute(query, params).fetchall()
+    conn.close()
+    return jsonify([dict(t) for t in tasks])
+
+
+@app.route("/submit", methods=["POST"])
+def submit():
+    data = request.get_json()
+    user_id = data.get("user_id")
+    task_id = data.get("task_id")
+    user_output = data.get("output", "")
+    conn = get_db()
+    task = conn.execute("SELECT * FROM tasks WHERE id=?", (task_id,)).fetchone()
+    user = conn.execute("SELECT * FROM users WHERE id=?", (user_id,)).fetchone()
+    if not task or not user:
+        conn.close()
+        return jsonify({"message": "Bulunamadı."}), 404
+
+    if user_output.strip() == task["expected_output"].strip():
+        new_xp = user["xp"] + task["xp_reward"]
+        new_level = calculate_level(new_xp)
+        new_completed = user["completed_tasks"] + 1
+        conn.execute("UPDATE users SET xp=?,level=?,completed_tasks=? WHERE id=?",
+                     (new_xp, new_level, new_completed, user_id))
+        conn.commit()
+        new_badges = check_badges(conn, user_id, new_xp, new_level, new_completed)
+        conn.commit()
+        conn.close()
+        return jsonify({
+            "success": True,
+            "message": "Doğru cevap! Tebrikler! 🎉",
+            "xp_kazandi": task["xp_reward"],
+            "total_xp": new_xp,
+            "level": new_level,
+            "completed_tasks": new_completed,
+            "new_badges": new_badges
+        })
+    conn.close()
+    return jsonify({"success": False, "message": "Yanlış cevap. Tekrar dene!", "hint": task["hint"]}), 400
+
+
+@app.route("/profile/<int:user_id>")
+def profile(user_id):
+    conn = get_db()
+    user = conn.execute("SELECT id,username,email,xp,level,completed_tasks,streak FROM users WHERE id=?", (user_id,)).fetchone()
+    if not user:
+        conn.close()
+        return jsonify({"message": "Kullanıcı bulunamadı."}), 404
+    badges = conn.execute("""
+        SELECT b.name, b.description, b.icon, ub.earned_at
+        FROM user_badges ub JOIN badges b ON ub.badge_id=b.id
+        WHERE ub.user_id=? ORDER BY ub.earned_at DESC
+    """, (user_id,)).fetchall()
+
+    # Dil bazlı istatistik
+    stats = conn.execute("""
+        SELECT t.language, COUNT(*) as count
+        FROM tasks t
+        WHERE t.id IN (
+            SELECT DISTINCT task_id FROM (
+                SELECT ? as uid
+            )
+        )
+        GROUP BY t.language
+    """, (user_id,)).fetchall()
+
+    conn.close()
+    return jsonify({**dict(user), "badges": [dict(b) for b in badges]})
+
+
+@app.route("/leaderboard")
+def leaderboard():
+    conn = get_db()
+    users = conn.execute(
+        "SELECT id,username,xp,level,completed_tasks FROM users ORDER BY xp DESC LIMIT 20"
+    ).fetchall()
+    conn.close()
+    return jsonify([dict(u) for u in users])
+
+
+@app.route("/badges")
+def all_badges():
+    conn = get_db()
+    badges = conn.execute("SELECT * FROM badges ORDER BY condition_value").fetchall()
+    conn.close()
+    return jsonify([dict(b) for b in badges])
+
+
+@app.route("/stats/<int:user_id>")
+def user_stats(user_id):
+    conn = get_db()
+    user = conn.execute("SELECT xp, level, completed_tasks FROM users WHERE id=?", (user_id,)).fetchone()
+    if not user:
+        conn.close()
+        return jsonify({}), 404
+    total_tasks = conn.execute("SELECT COUNT(*) as c FROM tasks").fetchone()["c"]
+    badge_count = conn.execute("SELECT COUNT(*) as c FROM user_badges WHERE user_id=?", (user_id,)).fetchone()["c"]
+    conn.close()
+    return jsonify({
+        "xp": user["xp"],
+        "level": user["level"],
+        "completed_tasks": user["completed_tasks"],
+        "total_tasks": total_tasks,
+        "badge_count": badge_count,
+        "completion_pct": round((user["completed_tasks"] / total_tasks) * 100) if total_tasks > 0 else 0
+    })
+
+
+if __name__ == "__main__":
+    app.run(debug=True, port=5000)

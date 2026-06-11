@@ -1,0 +1,400 @@
+// ─── KADEMELİ VE PEDAGOJİK ÜNİVERSİTE GÖREV VERİ SETİ (KOLAYDAN ZORA) ─────────
+const UNIVERSITE_TASKS = {
+  python: [
+    { level: 1, title: "Isınma Egzersizi", desc: "Ekrana 'Merhaba Dünya' yazdıran en temel Python kodunu print() fonksiyonu ile yazın.", correct_answer: "print(\"Merhaba Dünya\")" },
+    { level: 2, title: "Değişkenler ve Koşullar", desc: "Eğer 'yas' değişkeni 18'den büyük veya eşitse ekrana 'Giriş Başarılı' yazan if bloğunu kurun.", correct_answer: "if yas >= 18:\n    print(\"Giriş Başarılı\")" },
+    { level: 3, title: "Döngü Yapıları", desc: "0'dan 5'e kadar (5 hariç) olan sayıları ekrana yazdıran standart bir for döngüsü yazın.", correct_answer: "for i in range(5):\n    print(i)" },
+    { level: 4, title: "Fonksiyon Tanımlama", desc: "Gelen bir sayının iki katını döndüren (return) 'iki_katı(x)' isimli bir fonksiyon fonksiyon mimarisi oluşturun.", correct_answer: "def iki_kati(x):\n    return x * 2" },
+    { level: 5, title: "Liste ve Eleman Ekleme", desc: "'sayilar' isimli boş bir liste oluşturun ve .append() metodu ile içine 10 sayısını ekleyin.", correct_answer: "sayilar = []\nsayilar.append(10)" },
+    { level: 6, title: "Sözlük (Dictionary) Yapısı", desc: "İçinde 'ad': 'Ahmet' ve 'not': 85 verilerini barındıran 'ogrenci' isimli bir dictionary tanımlayın.", correct_answer: "ogrenci = {\"ad\": \"Ahmet\", \"not\": 85}" },
+    { level: 7, title: "List Comprehension", desc: "List Comprehension kullanarak, 1'den 5'e kadar olan sayıların karelerinden oluşan bir 'kareler' listesini tek satırda türetin.", correct_answer: "kareler = [x**2 for x in range(1, 6)]" },
+    { level: 8, title: "Bitsel Mantık (Bitwise)", desc: "Verilen bir sayının 2'nin kuvveti olup olmadığını bitsel (Bitwise &) operatörü kullanarak tek satırda kontrol eden fonksiyon gövdesini yazın.", correct_answer: "def is_power_of_two(n):\n    return n > 0 and (n & (n - 1)) == 0" },
+    { level: 9, title: "Hata Yönetimi (Try-Except)", desc: "Gelişmiş veri validasyonu için negatif sayılarda hata fırlatan bir Custom Exception sınıfı yazın.", correct_answer: "class NegatifHata(Exception): pass\nif x < 0: raise NegatifHata()" },
+    { level: 10, title: "Dosya G/Ç ve Filtreleme", desc: "Bir log dosyasındaki 'ERROR' içeren satırları ayıklayıp yeni bir dosyaya güvenli yazan context manager yapısını kurun.", correct_answer: "with open('log.txt') as f, open('err.txt', 'w') as w:\n    for line in f:\n        if 'ERROR' in line: w.write(line)" },
+    { level: 11, title: "Kalıtım (OOP Inheritance)", desc: "Miras alan Akademisyen sınıfında super() kullanarak üst sınıfın kurucu metodunu tetikleyin.", correct_answer: "class Akademisyen(Personel):\n    def __init__(self, ad, unvan):\n        super().__init__(ad)\n        self.unvan = unvan" },
+    { level: 12, title: "Dekoratör Tasarım Deseni", desc: "Bir fonksiyonun çalışma süresini hesaplayan @sure_olcer isimli bir decorator wrapper mimarisi geliştirin.", correct_answer: "def sure_olcer(f):\n    def wrapper(*args, **kw):\n        t1 = time.time()\n        r = f(*args, **kw)\n        print(time.time()-t1)\n        return r\n    return wrapper" },
+    { level: 13, title: "Veri Yapıları (Stack)", desc: "Nesne yönelimli programlama mantığıyla çalışan, push ve pop fonksiyonlarına sahip bir Stack (Yığın) sınıfı kodlayın.", correct_answer: "class Stack:\n    def __init__(self): self.items = []\n    def push(self, val): self.items.append(val)\n    def pop(self): return self.items.pop()" }
+  ],
+  javascript: [
+    { level: 1, title: "Konsol Çıktısı", desc: "Konsola 'Codify' metnini yazdıran en temel JavaScript kodunu yazın.", correct_answer: "console.log(\"Codify\");" },
+    { level: 2, title: "Değişken Tanımlama", desc: "Değeri sabit olan ve değiştirilemeyen 'pi' isminde, 3.14 değerine sahip bir değişken oluşturun.", correct_answer: "const pi = 3.14;" },
+    { level: 3, title: "Arrow Functions", desc: "Gelen sayının karesini alan tek satırlık bir arrow fonksiyonu 'kareAl' adıyla tanımlayın.", correct_answer: "const kareAl = x => x * x;" },
+    { level: 4, title: "Asenkron Gecikme", desc: "Arrow function kullanarak 2 saniye (2000ms) sonra konsola veri basan bir setTimeout fonksiyonu yazın.", correct_answer: "setTimeout(() => {\n    console.log(\"Done\");\n}, 2000);" },
+    { level: 13, title: "Gelişmiş Promise Mimarisi", desc: "Bir asenkron API isteğini simüle eden ve olumlu durumda resolve, olumsuzda reject döndüren bir Promise yapısı kurun.", correct_answer: "const istek = () => new Promise((res, rej) => {\n    if (status) res(\"Başarılı\"); else rej(\"Hata\");\n});" }
+  ],
+  c: [
+    { level: 1, title: "Ekrana Yazdırma", desc: "C dilinde standart çıktı kütüphanesini kullanarak ekrana 'Selam' yazdıran kodu printf ile kurun.", correct_answer: "printf(\"Selam\");" },
+    { level: 2, title: "Bellek Boyutları", desc: "C dilinde standart bir tamsayı (int) tipinin bellekte kapladığı alanı sizeof operatörüyle bulup printf ile basın.", correct_answer: "printf(\"%lu\", sizeof(int));" },
+    { level: 7, title: "Pointer ve Adres Takası", desc: "İki tam sayının değerini bellek adresleri üzerinden (Call by Reference) takas eden swap fonksiyonunu yazın.", correct_answer: "void swap(int *a, int *b) {\n    int temp = *a;\n    *a = *b;\n    *b = temp;\n}" },
+    { level: 13, title: "Bağlı Liste (Linked List)", desc: "Dinamik bellek ayırarak tek yönlü bir bağlı listenin düğüm (Node) yapısını struct ile tanımlayın.", correct_answer: "struct Node {\n    int data;\n    struct Node* next;\n};" }
+  ],
+  java: [
+    { level: 1, title: "Ekrana Yazdırma", desc: "Java çıktı akışını kullanarak ekrana sadece 'Codify' yazdıran tek satırlık kodu yazın.", correct_answer: "System.out.println(\"Codify\");" },
+    { level: 2, title: "Sınıf İskeleti", desc: "Java'da ekrana çıktı veren standart Main metodunu ve sınıf iskeletini kurun.", correct_answer: "public class Main {\n    public static void main(String[] args) {\n        System.out.println(\"Codify\");\n    }\n}" },
+    { level: 13, title: "Soyut Sınıf (Abstract)", desc: "Miras alan sınıfların alan hesaplamasını zorunlu kılan soyut bir Shape sınıfı ve calculateArea metodu tanımlayın.", correct_answer: "abstract class Shape {\n    abstract double calculateArea();\n}" }
+  ],
+  html: [
+    { level: 1, title: "En Temel Başlık", desc: "HTML sayfanızda en büyük ve en önemli ana başlığı oluşturmak için kullanılan etiketi açıp kapatarak içine 'Başlık' yazın.", correct_answer: "<h1>Başlık</h1>" },
+    { level: 2, title: "Semantik Yapı", desc: "SEO ve arama motorları uyumluluğu için semantik bir header alanı açıp içine h1 başlığı ekleyin.", correct_answer: "<header><h1>Başlık</h1></header>" },
+    { level: 13, title: "Erişilebilirlik", desc: "Görme engelli kullanıcılar için bir ekran okuyucu (aria-label) ve form etiket eşleşmesi içeren input yapısı kurun.", correct_answer: "<label for='user'>Adı:</label><input id='user' aria-label='Kullanıcı Adı'>" }
+  ]
+};
+
+const API_URL = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
+    ? "http://localhost:5000"
+    : "https://RENDER_URL_BURAYA.onrender.com";
+
+// ─── YARDIMCI FONKSİYONLAR ──────────────────────────────────────────────────
+
+function getUser() {
+    const u = localStorage.getItem("codify_user");
+    return u ? JSON.parse(u) : null;
+}
+
+function saveUser(user) {
+    localStorage.setItem("codify_user", JSON.stringify(user));
+}
+
+function requireLogin() {
+    if (!getUser()) window.location.href = "login.html";
+}
+
+function logout() {
+    localStorage.removeItem("codify_user");
+    window.location.href = "index.html";
+}
+
+// 13 Kademeli Üniversite Seviyesi İçin Genişletilmiş XP Eşikleri
+function xpThresholds() { return [0, 100, 250, 500, 800, 1200, 1700, 2300, 3000, 3800, 4700, 5700, 6800, 99999]; }
+function xpForLevel(level) { return xpThresholds()[level] || 99999; }
+function xpBaseForLevel(level) { return xpThresholds()[level - 1] || 0; }
+function xpPercent(user) {
+    const base = xpBaseForLevel(user.level);
+    const next = xpForLevel(user.level);
+    return Math.min(100, Math.round(((user.xp - base) / (next - base)) * 100));
+}
+
+// ─── BİLDİRİM (TOAST) SİSTEMİ ───────────────────────────────────────────────
+
+function showToast(msg, type = "info", duration = 3000) {
+    let box = document.getElementById("toastBox");
+    if (!box) {
+        box = document.createElement("div");
+        box.id = "toastBox";
+        box.style.position = "fixed";
+        box.style.bottom = "20px";
+        box.style.right = "20px";
+        box.style.zIndex = "10000";
+        box.style.display = "flex";
+        box.style.flexDirection = "column";
+        box.style.gap = "10px";
+        document.body.appendChild(box);
+    }
+
+    const t = document.createElement("div");
+    t.innerText = msg;
+    t.style.padding = "12px 20px";
+    t.style.borderRadius = "8px";
+    t.style.color = "#fff";
+    t.style.fontWeight = "bold";
+    t.style.boxShadow = "0 4px 12px rgba(0,0,0,0.3)";
+    t.style.transition = "all 0.3s ease";
+
+    if (type === "success") t.style.background = "#2ecc71";
+    else if (type === "error") t.style.background = "#e74c3c";
+    else t.style.background = "#3498db";
+
+    box.appendChild(t);
+    setTimeout(() => { t.style.opacity = "0"; setTimeout(() => t.remove(), 300); }, duration);
+}
+
+// 🔒 GÜVENLİK VE SYNTAX SÜZGECİ (Hile Engelleme Mekanizması)
+function kodGecerliMi(userCode, lang) {
+    const code = userCode.trim();
+    const l = lang.toLowerCase();
+
+    if (l === "python") {
+        return code.includes("print") || code.includes("def") || code.includes("if") || code.includes("while") || code.includes("for") || code.includes("lambda") || code.includes("class") || code.includes("import") || code.includes("with") || code.includes("=") || code.includes("[") || code.includes("{");
+    }
+    if (l === "javascript" || l === "js") {
+        return code.includes("console.log") || code.includes("function") || code.includes("const") || code.includes("let") || code.includes("var") || code.includes("=>") || code.includes("setTimeout") || code.includes("class") || code.includes("Promise");
+    }
+    if (l === "html") {
+        return code.includes("<") && code.includes(">");
+    }
+    if (l === "c") {
+        return (code.includes("printf") || code.includes("int ") || code.includes("void") || code.includes("struct") || code.includes("for") || code.includes("FILE") || code.includes("strcpy")) && code.includes(";");
+    }
+    if (l === "java") {
+        return (code.includes("System.out") || code.includes("class") || code.includes("public") || code.includes("void") || code.includes("double") || code.includes("interface") || code.includes("abstract")) && code.includes(";");
+    }
+    return true;
+}
+
+// ─── AUTHENTICATION (GİRİŞ/KAYIT) ───────────────────────────────────────────
+
+async function login() {
+    const email = document.getElementById("email")?.value.trim();
+    const password = document.getElementById("password")?.value.trim();
+    const msg = document.getElementById("authMsg");
+
+    if (!email || !password) {
+        if (msg) msg.textContent = "Lütfen tüm alanları doldurun.";
+        return;
+    }
+
+    try {
+        const res = await fetch(`${API_URL}/auth/login`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, password })
+        });
+        const data = await res.json();
+
+        if (res.ok && data.user) {
+            saveUser(data.user);
+            window.location.href = "dashboard.html";
+        } else {
+            if (msg) msg.textContent = data.error || "Giriş başarısız.";
+        }
+    } catch {
+        const fakeUser = { id: "offline_user", username: email.split("@")[0], email: email, xp: 0, level: 1 };
+        saveUser(fakeUser);
+        window.location.href = "dashboard.html";
+    }
+}
+
+async function register() {
+    const username = document.getElementById("username")?.value.trim();
+    const email = document.getElementById("email")?.value.trim();
+    const password = document.getElementById("password")?.value.trim();
+    const msg = document.getElementById("authMsg");
+
+    if (!username || !email || !password) {
+        if (msg) msg.textContent = "Lütfen tüm alanları doldurun.";
+        return;
+    }
+
+    try {
+        const res = await fetch(`${API_URL}/auth/register`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ username, email, password })
+        });
+        const data = await res.json();
+
+        if (res.ok && data.user) {
+            saveUser(data.user);
+            window.location.href = "dashboard.html";
+        } else {
+            if (msg) msg.textContent = data.error || "Kayıt başarısız.";
+        }
+    } catch {
+        const fakeUser = { id: "offline_user", username: username, email: email, xp: 0, level: 1 };
+        saveUser(fakeUser);
+        window.location.href = "dashboard.html";
+    }
+}
+
+// ─── DASHBOARD YÖNETİMİ ──────────────────────────────────────────────────────
+
+function loadDashboard() {
+    requireLogin();
+    const user = getUser();
+
+    document.querySelectorAll(".dash-username").forEach(el => el.textContent = user.username);
+    document.querySelectorAll(".dash-level").forEach(el => el.textContent = `Level ${user.level}`);
+    document.querySelectorAll(".xp-current").forEach(el => el.textContent = `${user.xp} XP`);
+    document.querySelectorAll(".xp-next").forEach(el => el.textContent = `Level ${user.level + 1}: ${xpForLevel(user.level)} XP`);
+
+    const pct = xpPercent(user);
+    document.querySelectorAll(".xp-fill").forEach(el => el.style.width = pct + "%");
+}
+
+function goToTasks(lang) {
+    localStorage.setItem("codify_language", lang);
+    window.location.href = "task.html";
+}
+
+// ─── GÖREVLER (TASK HTML KONTROLÜ) ───────────────────────────────────────────
+
+let currentTasks = [];
+let currentTaskIndex = 0;
+
+function loadTasks() {
+    requireLogin();
+    
+    let lang = localStorage.getItem("codify_language") || "Python";
+    let langKey = lang.toLowerCase().trim();
+    
+    if (langKey === "c dili") langKey = "c";
+
+    document.getElementById("taskLangTitle").textContent = `${lang} Akademik Görevleri`;
+
+    currentTasks = UNIVERSITE_TASKS[langKey] || [];
+
+    if (currentTasks.length === 0) {
+        document.getElementById("taskBoxContent").innerHTML = `<p>Bu dil (${lang}) için akademik görev veri seti bulunamadı.</p>`;
+        return;
+    }
+
+    currentTaskIndex = 0;
+    showTask();
+}
+
+function showTask() {
+    if (currentTaskIndex >= currentTasks.length) {
+        document.getElementById("taskBoxContent").innerHTML = `
+            <div style="text-align:center; padding: 40px;">
+                <h2 style="color:var(--gold);">🎉 Tebrikler! İstanbul Topkapı Üniversitesi Müfredatını Bitirdiniz!</h2>
+                <p style="margin-top:10px; color:var(--muted);">13 Seviyenin tamamını başarıyla geçerek akademik yetkinliğinizi tamamladınız.</p>
+                <a href="dashboard.html" class="btn btn-gold" style="margin-top:24px; display:inline-block;">Dashboard'a Dön</a>
+            </div>
+        `;
+        return;
+    }
+
+    const task = currentTasks[currentTaskIndex];
+    document.getElementById("taskBoxContent").innerHTML = `
+        <div class="task-card" style="background:var(--card); border:1px solid var(--border); padding:24px; border-radius:20px;">
+            <span class="level-badge" style="background:var(--gold); color:#000; padding:4px 12px; border-radius:50px; font-weight:bold; font-size:12px;">Seviye ${task.level} / 13</span>
+            <h3 style="margin: 14px 0 8px 0; color: var(--gold); font-size:20px;">${task.title}</h3>
+            <p style="background: rgba(255,255,255,0.03); padding: 16px; border-radius: 12px; line-height: 1.6; color:#e0e0e0; font-size:15px; border-left:4px solid var(--gold);">${task.desc}</p>
+            
+            <div class="editor-wrap" style="margin-top: 24px;">
+                <label style="font-weight: bold; display: block; margin-bottom: 8px; color:var(--muted);">Akademik Kod Editör Alanı:</label>
+                <textarea id="codeEditor" rows="9" style="width:100%; background:#141414; color:#2ecc71; font-family:monospace; padding:166px; border-radius:12px; border:1px solid var(--border); font-size:14px; line-height:1.5;" placeholder="Kodunuzu buraya yazın... Sadece kelime/çıktı yazarsanız hile koruması bunu engelleyecektir!"></textarea>
+            </div>
+            
+            <div style="margin-top: 20px; display: flex; gap: 12px;">
+                <button class="btn btn-gold" onclick="checkTaskAnswer()">✅ Kodu Analiz Et ve Gönder</button>
+            </div>
+            <div id="taskResult" style="margin-top: 20px; font-size:15px; padding:10px; border-radius:8px;"></div>
+        </div>
+    `;
+    
+    // Textarea padding düzeltmesi (görsel kaymayı engellemek için)
+    setTimeout(() => {
+        const ed = document.getElementById("codeEditor");
+        if(ed) ed.style.padding = "16px";
+    }, 10);
+}
+
+async function checkTaskAnswer() {
+    const user = getUser();
+    const task = currentTasks[currentTaskIndex];
+    const userCode = document.getElementById("codeEditor").value.trim();
+    const resultDiv = document.getElementById("taskResult");
+    const lang = localStorage.getItem("codify_language") || "Python";
+
+    if (!userCode) {
+        showToast("Lütfen önce kod alanını doldurun!", "error");
+        return;
+    }
+
+    // Hile Engelleme Kontrolü
+    if (!kodGecerliMi(userCode, lang)) {
+        resultDiv.style.background = "rgba(231, 76, 60, 0.1)";
+        resultDiv.innerHTML = `<span style="color:#e74c3c;">❌ SÖZDİZİMİ HATASI: Yazdığınız ifade geçerli bir ${lang} kod mimarisi içermiyor! Düz metin veya sadece çıktı yazarak sistemi geçemezsiniz.</span>`;
+        showToast("Hile engellendi! Gerçek kod yazın.", "error");
+        return;
+    }
+
+    const temizKullaniciKodu = userCode.replace(/\s+/g, '');
+    const temizDogruCevap = task.correct_answer.replace(/\s+/g, '');
+
+    if (temizKullaniciKodu === temizDogruCevap || temizKullaniciKodu.includes(temizDogruCevap)) {
+        resultDiv.style.background = "rgba(46, 204, 113, 0.1)";
+        resultDiv.innerHTML = `<span style="color:#2ecc71;">🎉 TEBRİKLER! Yazdığınız algoritma üniversite akademik test senaryolarını başarıyla geçti. +50 XP</span>`;
+        showToast("Harika! Doğru Kod.", "success");
+
+        user.xp += 50;
+
+        if (user.xp >= xpForLevel(user.level)) {
+            user.level += 1;
+            showToast(`🚀 TEBRİKLER! SEVİYE ATLADINIZ! YENİ LEVEL: ${user.level}`, "success", 5000);
+        }
+
+        saveUser(user);
+
+        try {
+            await fetch(`${API_URL}/tasks/submit`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ userId: user.id, level: user.level, xp: user.xp })
+            });
+        } catch (e) { }
+
+        currentTaskIndex++;
+        setTimeout(() => { showTask(); }, 2500);
+
+    } else {
+        resultDiv.style.background = "rgba(231, 76, 60, 0.1)";
+        resultDiv.innerHTML = `<span style="color:#e74c3c;">❌ ALGORİTMA HATASI: Kodunuz çalıştı ancak beklenen akademik çıktıyı üretemedi veya eksik yapı kurdunuz. Lütfen teorik ders notlarını inceleyin.</span>`;
+        showToast("Hatalı kod yapısı.", "error");
+    }
+}
+
+// ─── PROFİL & SIRALAMA ───────────────────────────────────────────────────────
+
+function loadProfile() {
+    requireLogin();
+    const user = getUser();
+    document.querySelector(".p-name").textContent = user.username;
+    document.querySelector(".p-level").textContent = `Level ${user.level}`;
+    document.querySelector(".p-xp").textContent = user.xp;
+    
+    const pct = xpPercent(user);
+    document.querySelector(".p-pct").textContent = `%${pct}`;
+    if(document.querySelector(".xp-fill")) {
+        document.querySelector(".xp-fill").style.width = pct + "%";
+    }
+}
+
+async function loadLeaderboard() {
+    requireLogin();
+    const list = document.getElementById("lbList");
+    if (!list) return;
+
+    try {
+        const res = await fetch(`${API_URL}/leaderboard`);
+        const users = await res.json();
+        const me = getUser();
+        const medals = ["🥇", "🥈", "🥉"];
+
+        list.innerHTML = users.map((u, i) => `
+            <div class="lb-card ${me && u.id === me.id ? 'me' : ''}">
+                <div class="lb-rank">${medals[i] || `#${i + 1}`}</div>
+                <div class="lb-name">${u.username} ${me && u.id === me.id ? '<span style="color:var(--gold);font-size:12px">(Sen)</span>' : ''}</div>
+                <div>
+                    <div class="lb-xp">⭐ ${u.xp} XP</div>
+                    <div class="lb-level">Level ${u.level}</div>
+                </div>
+            </div>
+        `).join("");
+    } catch {
+        const me = getUser();
+        list.innerHTML = `
+            <div class="lb-card me">
+                <div class="lb-rank">🥇</div>
+                <div class="lb-name">${me.username} (Sen)</div>
+                <div>
+                    <div class="lb-xp">⭐ ${me.xp} XP</div>
+                    <div class="lb-level">Level ${me.level}</div>
+                </div>
+            </div>
+        `;
+    }
+}
+
+// ─── SAYFA BAŞLATICI ─────────────────────────────────────────────────────────
+
+document.addEventListener("DOMContentLoaded", () => {
+    if (typeof applyLang === "function") applyLang();
+
+    const page = window.location.pathname.split("/").pop();
+    if (page === "dashboard.html") loadDashboard();
+    if (page === "task.html") loadTasks();
+    if (page === "profile.html") loadProfile();
+    if (page === "leaderboard.html") loadLeaderboard();
+});

@@ -1,0 +1,123 @@
+const LANG = {
+    tr: {
+        nav_home: "Ana Sayfa", nav_levels: "Levellar", nav_tasks: "Görevler",
+        nav_community: "Topluluk", nav_about: "Hakkımızda",
+        login: "Giriş Yap", register: "Kayıt Ol",
+        hero_badge: "# Programlamayı Öğren",
+        hero_h1_1: "Oyun ", hero_h1_2: "Gibi Öğren",
+        hero_sub: "Gerçek kod yazarak görevleri tamamla, seviyeleri geç, becerilerini geliştir.",
+        hero_tag: "✨ Kodla. Oyna. Seviye Atla. ✨",
+        start: "Hemen Başla", signin: "Giriş Yap",
+        f1_title: "Gerçek Görevler", f1_desc: "Gerçek dünyadan alınmış kodlama görevleriyle öğren.",
+        f2_title: "Seviye Sistemi", f2_desc: "XP kazan, seviyeleri geç, gelişimini takip et.",
+        f3_title: "Rozet & Başarılar", f3_desc: "13 farklı rozet seni bekliyor.",
+        f4_title: "Topluluk", f4_desc: "Leaderboard'da yarış, en iyiler arasına gir.",
+        lang_title: "5 Programlama Dili",
+        levels_title: "Seviye Sistemi",
+        footer_tag: "Kodla. Oyna. Seviye Atla.",
+        // auth
+        login_title: "Giriş Yap", login_sub: "Hesabına giriş yap ve öğrenmeye devam et.",
+        email_label: "E-posta", pass_label: "Şifre", user_label: "Kullanıcı Adı",
+        no_account: "Hesabın yok mu?", have_account: "Zaten hesabın var mı?",
+        // dashboard
+        welcome: "Hoş Geldin", today: "Bugün yeni şeyler öğrenme zamanı!",
+        choose_lang: "Dil Seç ve Başla", go_leaderboard: "🏆 Sıralama",
+        go_profile: "👤 Profilim", logout: "Çıkış",
+        // task
+        task_loading: "Görev yükleniyor...", submit: "✅ Gönder", next: "Sonraki →",
+        hint_btn: "💡 İpucu", result_empty: "Henüz gönderim yapılmadı.",
+        all_done: "🎉 Tüm Görevler Tamamlandı!",
+        // profile
+        profile_title: "Profilim", badges_title: "🏆 Kazanılan Rozetler",
+        no_badge: "Henüz rozet kazanmadın. Görevleri tamamla!",
+        // leaderboard
+        lb_title: "🏆 Sıralama Tablosu", lb_sub: "En çok XP kazanan öğrenciler",
+    },
+    en: {
+        nav_home: "Home", nav_levels: "Levels", nav_tasks: "Tasks",
+        nav_community: "Community", nav_about: "About",
+        login: "Log In", register: "Sign Up",
+        hero_badge: "# Learn Programming",
+        hero_h1_1: "Learn Like a ", hero_h1_2: "Game",
+        hero_sub: "Complete real coding tasks, level up, and sharpen your skills.",
+        hero_tag: "✨ Code. Play. Level Up. ✨",
+        start: "Get Started", signin: "Log In",
+        f1_title: "Real Tasks", f1_desc: "Learn with coding challenges taken from the real world.",
+        f2_title: "Level System", f2_desc: "Earn XP, pass levels, track your progress.",
+        f3_title: "Badges & Achievements", f3_desc: "13 unique badges are waiting for you.",
+        f4_title: "Community", f4_desc: "Compete on the leaderboard, join the best.",
+        lang_title: "5 Programming Languages",
+        levels_title: "Level System",
+        footer_tag: "Code. Play. Level Up.",
+        login_title: "Log In", login_sub: "Sign in to your account and continue learning.",
+        email_label: "Email", pass_label: "Password", user_label: "Username",
+        no_account: "Don't have an account?", have_account: "Already have an account?",
+        welcome: "Welcome", today: "Time to learn something new today!",
+        choose_lang: "Choose Language & Start", go_leaderboard: "🏆 Leaderboard",
+        go_profile: "👤 My Profile", logout: "Logout",
+        task_loading: "Loading task...", submit: "✅ Submit", next: "Next →",
+        hint_btn: "💡 Hint", result_empty: "No submission yet.",
+        all_done: "🎉 All Tasks Completed!",
+        profile_title: "My Profile", badges_title: "🏆 Earned Badges",
+        no_badge: "No badges yet. Complete tasks to earn them!",
+        lb_title: "🏆 Leaderboard", lb_sub: "Top XP earners",
+    },
+    ar: {
+        nav_home: "الرئيسية", nav_levels: "المستويات", nav_tasks: "المهام",
+        nav_community: "المجتمع", nav_about: "عن المنصة",
+        login: "تسجيل الدخول", register: "إنشاء حساب",
+        hero_badge: "# تعلم البرمجة",
+        hero_h1_1: "تعلم كـ", hero_h1_2: "لعبة",
+        hero_sub: "أكمل مهام البرمجة الحقيقية، ارتقِ بمستواك، وطوّر مهاراتك.",
+        hero_tag: "✨ برمج. العب. ارتقِ. ✨",
+        start: "ابدأ الآن", signin: "تسجيل الدخول",
+        f1_title: "مهام حقيقية", f1_desc: "تعلم من خلال تحديات برمجية من العالم الحقيقي.",
+        f2_title: "نظام المستويات", f2_desc: "اكسب نقاط XP، اجتز المستويات، تابع تقدمك.",
+        f3_title: "الشارات والإنجازات", f3_desc: "13 شارة مختلفة تنتظرك.",
+        f4_title: "المجتمع", f4_desc: "تنافس في لوحة المتصدرين.",
+        lang_title: "5 لغات برمجية",
+        levels_title: "نظام المستويات",
+        footer_tag: "برمج. العب. ارتقِ.",
+        login_title: "تسجيل الدخول", login_sub: "سجّل دخولك وواصل التعلم.",
+        email_label: "البريد الإلكتروني", pass_label: "كلمة المرور", user_label: "اسم المستخدم",
+        no_account: "ليس لديك حساب؟", have_account: "لديك حساب بالفعل؟",
+        welcome: "مرحباً", today: "حان وقت تعلم شيء جديد اليوم!",
+        choose_lang: "اختر لغة وابدأ", go_leaderboard: "🏆 المتصدرون",
+        go_profile: "👤 ملفي", logout: "خروج",
+        task_loading: "جارٍ تحميل المهمة...", submit: "✅ إرسال", next: "التالي →",
+        hint_btn: "💡 تلميح", result_empty: "لم يتم الإرسال بعد.",
+        all_done: "🎉 أكملت جميع المهام!",
+        profile_title: "ملفي الشخصي", badges_title: "🏆 الشارات المكتسبة",
+        no_badge: "لا توجد شارات بعد. أكمل المهام لتكسب شارات!",
+        lb_title: "🏆 لوحة المتصدرين", lb_sub: "أعلى المتنافسين في نقاط XP",
+    }
+};
+
+function getLang() {
+    return localStorage.getItem("codify_lang") || "tr";
+}
+
+function setLang(code) {
+    localStorage.setItem("codify_lang", code);
+    applyLang();
+}
+
+function t(key) {
+    const lang = getLang();
+    return LANG[lang]?.[key] || LANG["tr"][key] || key;
+}
+
+function applyLang() {
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        el.textContent = t(key);
+    });
+    document.querySelectorAll("[data-i18n-ph]").forEach(el => {
+        el.placeholder = t(el.getAttribute("data-i18n-ph"));
+    });
+    // RTL için
+    document.documentElement.dir = getLang() === "ar" ? "rtl" : "ltr";
+    document.querySelectorAll(".lang-btn").forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.lang === getLang());
+    });
+}

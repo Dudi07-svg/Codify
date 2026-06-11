@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codify — Dersler</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .lessons-layout { max-width: 1100px; margin: 0 auto; padding: 40px 24px; }
+
+        .lesson-grid { display: grid; grid-template-columns: 280px 1fr; gap: 28px; margin-top: 28px; }
+
+        .lesson-sidebar {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 20px;
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+        }
+
+        .lesson-sidebar h3 { color: var(--gold); font-size: 15px; margin-bottom: 14px; }
+
+        .lesson-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all .2s;
+            color: var(--muted);
+            font-size: 14px;
+            border: 1px solid transparent;
+            margin-bottom: 6px;
+        }
+
+        .lesson-item:hover { background: rgba(250,204,21,0.06); color: var(--text); }
+        .lesson-item.active { background: rgba(250,204,21,0.1); color: var(--gold); border-color: var(--border); }
+        .lesson-item.done { color: var(--green); }
+        .lesson-item .li-icon { font-size: 18px; width: 24px; flex-shrink: 0; }
+        .lesson-item .li-num { font-size: 11px; color: var(--muted); margin-left: auto; }
+
+        .lesson-content {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 36px;
+        }
+
+        .lesson-content h2 { font-size: 26px; color: var(--gold); margin-bottom: 20px; }
+
+        .lesson-body {
+            color: var(--text);
+            font-size: 15px;
+            line-height: 1.9;
+            white-space: pre-wrap;
+            margin-bottom: 28px;
+        }
+
+        .code-block {
+            background: #020812;
+            border: 1px solid rgba(250,204,21,0.15);
+            border-radius: 16px;
+            padding: 24px;
+            font-family: 'Consolas', monospace;
+            font-size: 14px;
+            color: #a8ff78;
+            white-space: pre;
+            overflow-x: auto;
+            margin-bottom: 28px;
+            line-height: 1.7;
+        }
+
+        .code-block-label {
+            font-size: 12px;
+            color: var(--muted);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .lesson-nav {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .progress-bar-lessons {
+            height: 6px;
+            background: rgba(255,255,255,0.06);
+            border-radius: 3px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .progress-bar-lessons-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--gold), #f59e0b);
+            border-radius: 3px;
+            transition: width .4s;
+        }
+
+        .lang-tabs {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
+        }
+
+        .lang-tab {
+            padding: 10px 20px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: var(--card);
+            color: var(--muted);
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all .2s;
+        }
+
+        .lang-tab:hover, .lang-tab.active {
+            background: rgba(250,204,21,0.1);
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        @media (max-width: 768px) {
+            .lesson-grid { grid-template-columns: 1fr; }
+            .lesson-sidebar { position: relative; top: 0; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="lessons-layout">
+
+    <a href="dashboard.html" class="back-link">← Dashboard</a>
+
+    <div class="page-title">📖 Dersler</div>
+    <p class="page-subtitle">Göreve geçmeden önce konuları öğren. Sonra alıştırmalarla pekiştir!</p>
+
+    <!-- DİL SEKMELERİ -->
+    <div class="lang-tabs">
+        <button class="lang-tab active" onclick="setLang('Python')" id="tab-Python"><img src="images/python.png" alt="PYTHON" style="width: 50px; height: 50px;"></button>
+        <button class="lang-tab" onclick="setLang('HTML')" id="tab-HTML"><img src="images/html.png" alt="HTML" style="width: 50px; height: 50px;"></button>
+        <button class="lang-tab" onclick="setLang('JavaScript')" id="tab-JavaScript"><img src="images/javascript.png" alt="JAVASCRİPT" style="width: 50px; height: 50px;"></button>
+        <button class="lang-tab" onclick="setLang('C')" id="tab-C"><img src="images/c.png" alt="C" style="width: 50px; height: 50px;"></button>
+        <button class="lang-tab" onclick="setLang('Java')" id="tab-Java"><img src="images/java.png" alt="JAVA" style="width: 50px; height: 50px;"></button>
+    </div>
+
+    <div class="lesson-grid">
+
+        <!-- DERS LİSTESİ -->
+        <div class="lesson-sidebar">
+            <h3 id="sidebarTitle"><img src="images/python.png" alt="PYTHON" style="width: 50px; height: 50px;"></h3>
+            <div class="progress-bar-lessons">
+                <div class="progress-bar-lessons-fill" id="lessonProgress" style="width:0%"></div>
+            </div>
+            <div id="lessonList"></div>
+        </div>
+
+        <!-- DERS İÇERİĞİ -->
+        <div class="lesson-content" id="lessonContent">
+            <div style="text-align:center; padding:60px 20px; color:var(--muted)">
+                <div style="font-size:48px; margin-bottom:16px">👈</div>
+                <p>Soldan bir ders seç!</p>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="lang-switcher">
+    <button class="lang-btn active" data-lang="tr" onclick="setLang_i18n('tr')">TR</button>
+    <button class="lang-btn" data-lang="en" onclick="setLang_i18n('en')">EN</button>
+    <button class="lang-btn" data-lang="ar" onclick="setLang_i18n('ar')">AR</button>
+</div>
+
+<script src="lessons_data.js"></script>
+<script src="script.js"></script>
+<script src="i18n.js"></script>
+<script>
+// i18n lang fonksiyonunu yeniden adlandır çakışma olmasın
+function setLang_i18n(code) { setLang(code); }
+
+let currentLang = 'Python';
+let currentLesson = 0;
+let doneLessons = JSON.parse(localStorage.getItem('done_lessons') || '{}');
+
+const langIcons = { Python: '<img src="images/python.png" style="width:50px;">', 
+    HTML: '<img src="images/html.png" style="width:50px;">', 
+    JavaScript: '<img src="images/javascript.png" style="width:50px;">', 
+    C: '<img src="images/c.png" style="width:50px;">', 
+    Java: '<img src="images/java.png" style="width:50px;">'};
+
+function setLang(lang) {
+    currentLang = lang;
+    currentLesson = 0;
+
+    document.querySelectorAll('.lang-tab').forEach(t => t.classList.remove('active'));
+    const tab = document.getElementById('tab-' + lang);
+    if (tab) tab.classList.add('active');
+
+    document.getElementById('sidebarTitle').textContent = langIcons[lang] + ' ' + lang + ' Dersleri';
+    renderList();
+    showLesson(0);
+}
+
+function renderList() {
+    const lessons = LESSONS[currentLang] || [];
+    const done = doneLessons[currentLang] || [];
+    const list = document.getElementById('lessonList');
+
+    const pct = lessons.length > 0 ? Math.round((done.length / lessons.length) * 100) : 0;
+    document.getElementById('lessonProgress').style.width = pct + '%';
+
+    list.innerHTML = lessons.map((l, i) => `
+        <div class="lesson-item ${i === currentLesson ? 'active' : ''} ${done.includes(i) ? 'done' : ''}"
+             onclick="showLesson(${i})">
+            <span class="li-icon">${done.includes(i) ? '✅' : l.icon}</span>
+            <span>${l.title}</span>
+            <span class="li-num">${i + 1}/${lessons.length}</span>
+        </div>
+    `).join('');
+}
+
+function showLesson(index) {
+    currentLesson = index;
+    const lessons = LESSONS[currentLang] || [];
+    const lesson = lessons[index];
+    if (!lesson) return;
+
+    const content = document.getElementById('lessonContent');
+    content.innerHTML = `
+        <h2>${lesson.icon} ${lesson.title}</h2>
+        <div class="lesson-body">${lesson.content}</div>
+        <div class="code-block-label">📝 Kod Örneği</div>
+        <div class="code-block">${escapeHtml(lesson.code_example)}</div>
+        <div class="lesson-nav">
+            ${index > 0 ? `<button class="btn btn-ghost" onclick="showLesson(${index-1})">← Önceki</button>` : ''}
+            <button class="btn btn-gold" onclick="markDone(${index})">✅ Anladım, Sonraki →</button>
+            <button class="btn btn-outline" onclick="goToTask()">🎯 Göreve Geç</button>
+        </div>
+    `;
+    renderList();
+}
+
+function markDone(index) {
+    if (!doneLessons[currentLang]) doneLessons[currentLang] = [];
+    if (!doneLessons[currentLang].includes(index)) {
+        doneLessons[currentLang].push(index);
+        localStorage.setItem('done_lessons', JSON.stringify(doneLessons));
+    }
+    const lessons = LESSONS[currentLang] || [];
+    if (index + 1 < lessons.length) {
+        showLesson(index + 1);
+    } else {
+        showToast('🎉 Tüm ' + currentLang + ' derslerini tamamladın! Şimdi görevleri dene!', 'success', 4000);
+    }
+    renderList();
+}
+
+function goToTask() {
+    localStorage.setItem('codify_language', currentLang);
+    window.location.href = 'task.html';
+}
+
+function escapeHtml(text) {
+    return text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function showToast(msg, type, dur) {
+    let c = document.getElementById('toast');
+    const item = document.createElement('div');
+    item.className = 'toast-item ' + type;
+    item.textContent = msg;
+    c.appendChild(item);
+    setTimeout(() => { item.style.animation = 'fadeOut .3s forwards'; setTimeout(() => item.remove(), 300); }, dur || 3500);
+}
+
+// Başlat
+setLang('Python');
+</script>
+</body>
+</html>
